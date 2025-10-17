@@ -1,0 +1,38 @@
+server:
+  servlet:
+    context-path: /nimble-pagamento/api
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    nimble-pagamento: ${LOG_LEVEL:DEBUG}
+
+spring:
+  profiles:
+    active: ${APP_PROFILE:local} #alterar
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:55432/nimbledb}
+    username: ${DATASOURCE_USER:postgres}
+    password: ${DATASOURCE_PASS:postgres}
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      poolName: SpringBootJPAHikariCP
+      minimumIdle: 15
+      maximumPoolSize: 50
+      connectionTimeout: 30000
+      idleTimeout: 30000
+
+  
