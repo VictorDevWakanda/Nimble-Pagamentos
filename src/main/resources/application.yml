@@ -24,7 +24,7 @@ spring:
     active: ${APP_PROFILE:local} #alterar
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:55432/nimbledb}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5544/nimbledb}
     username: ${DATASOURCE_USER:postgres}
     password: ${DATASOURCE_PASS:postgres}
     type: com.zaxxer.hikari.HikariDataSource

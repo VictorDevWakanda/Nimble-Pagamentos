@@ -2,7 +2,7 @@ services:
   postgres_container:
     image: postgres:latest
     ports:
-      - "55432:5432"
+      - "5544:5432"  # Porta alterada para evitar conflito
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
