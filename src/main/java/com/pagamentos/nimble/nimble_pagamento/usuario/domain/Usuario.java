@@ -48,7 +48,7 @@ public class Usuario {
 
     //TODO Fazer logica encode para senha
     @NotBlank(message = "Insira uma senha")
-    @Column(name = "senha")
+    @Column(name = "senha_hash")
     private String senha;
 
     public Usuario(UsuarioRequest usuarioRequest) {

@@ -21,18 +21,15 @@ logging:
 
 spring:
   profiles:
-    active: ${APP_PROFILE:local} #alterar
+    active: local #alterar
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5544/nimbledb}
     username: ${DATASOURCE_USER:postgres}
     password: ${DATASOURCE_PASS:postgres}
-    type: com.zaxxer.hikari.HikariDataSource
     hikari:
-      poolName: SpringBootJPAHikariCP
-      minimumIdle: 15
-      maximumPoolSize: 50
-      connectionTimeout: 30000
-      idleTimeout: 30000
-
-  
+      pool-name: SpringBootJPAHikariCP
+      minimum-idle: 15
+      maximum-pool-size: 50
+      connection-timeout: 30000
+      idle-timeout: 30000
