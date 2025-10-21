@@ -16,13 +16,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Table(name = "usuario")
 public class Usuario {
@@ -36,32 +34,31 @@ public class Usuario {
     @Column(name = "nome")
     private String nome;
 
-    @CPF
-    @NotBlank(message = "CPF é obrigatório")
+    @NotBlank
+    @CPF(message = "CPF inválido")
     @Column(name = "cpf", unique = true)
     private String cpf;
 
-    @NotBlank(message = "Email é obrigatório")
-    @Column(name = "email", unique = true)
+    @NotBlank
     @Email(message = "Email inválido")
+    @Column(name = "email", unique = true)
     private String email;
 
-    //TODO Fazer logica encode para senha
-    @NotBlank(message = "Insira uma senha")
+    @NotBlank
     @Column(name = "senha_hash")
-    private String senha;
+    private String senhaHash;
 
-    public Usuario(UsuarioRequest usuarioRequest) {
+    public Usuario(UsuarioRequest usuarioRequest, String senhaHash) {
         this.nome = usuarioRequest.getNome();
         this.cpf = usuarioRequest.getCpf();
         this.email = usuarioRequest.getEmail();
-        this.senha = usuarioRequest.getSenha();
+        this.senhaHash = senhaHash;
     }
 
-    public void altera(UsuarioAlteracaoRequest usuarioAlteracaoRequest) {
+    public void altera(UsuarioAlteracaoRequest usuarioAlteracaoRequest, String senhaHash) {
         this.nome = usuarioAlteracaoRequest.getNome();
         this.email = usuarioAlteracaoRequest.getEmail();
-        this.senha = usuarioAlteracaoRequest.getSenha();
+        this.senhaHash = senhaHash;
     }
 
 }

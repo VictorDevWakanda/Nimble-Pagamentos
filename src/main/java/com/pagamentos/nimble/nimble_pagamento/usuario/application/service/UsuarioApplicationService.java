@@ -10,6 +10,7 @@ import com.pagamentos.nimble.nimble_pagamento.usuario.application.api.UsuarioReq
 import com.pagamentos.nimble.nimble_pagamento.usuario.application.api.UsuarioResponse;
 import com.pagamentos.nimble.nimble_pagamento.usuario.application.repository.UsuarioRepository;
 import com.pagamentos.nimble.nimble_pagamento.usuario.domain.Usuario;
+import com.pagamentos.nimble.nimble_pagamento.usuario.domain.service.SenhaHashService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,13 +20,14 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class UsuarioApplicationService implements UsuarioService {
 
-    // private final PasswordEncoder passwordEncoder;
     private final UsuarioRepository usuarioRepository;
+    private final SenhaHashService senhaHashService;
 
     @Override
     public UsuarioResponse criaUsuario(UsuarioRequest usuarioRequest) {
         log.info("[Inicia] UsuarioApplicationService - criaUsuario");
-        Usuario novoUsuario = new Usuario(usuarioRequest);
+        String senhaHash = senhaHashService.gerarHash(usuarioRequest.getSenha());
+        Usuario novoUsuario = new Usuario(usuarioRequest, senhaHash);
         usuarioRepository.salvaUsuario(novoUsuario);
         log.info("[Finaliza] UsuarioApplicationService - criaUsuario");
         return new UsuarioResponse(novoUsuario.getIdUsuario());
@@ -51,7 +53,8 @@ public class UsuarioApplicationService implements UsuarioService {
     public void patchAlteraUsuario(UUID idUsuario, UsuarioAlteracaoRequest usuarioAlteracaoRequest) {
         log.info("[Inicia] UsuarioApplicationService - patchAlteraUsuario");
         Usuario usuario = usuarioRepository.buscaUsuarioAtravesId(idUsuario);
-        usuario.altera(usuarioAlteracaoRequest);
+        String senhaHash = senhaHashService.gerarHash(usuarioAlteracaoRequest.getSenha());
+        usuario.altera(usuarioAlteracaoRequest, senhaHash);
         usuarioRepository.salvaUsuario(usuario);
         log.info("[Finaliza] UsuarioApplicationService - patchAlteraUsuario");
     }
