@@ -17,11 +17,11 @@ management:
 
 logging:
   level:
-    nimble-pagamento: ${LOG_LEVEL:DEBUG}
+    nimble-pagamento: DEBUG
 
 spring:
   profiles:
-    active: local #alterar
+    active: ${APP_PROFILE:local}
   datasource:
     driver-class-name: org.postgresql.Driver
     url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5544/nimbledb}
@@ -33,3 +33,18 @@ spring:
       maximum-pool-size: 50
       connection-timeout: 30000
       idle-timeout: 30000
+
+# Configurações JWT para autenticação
+security:
+  token:
+    jwt:
+      expiration: ${JWT_EXPIRATION:7200} # Expiração do token em segundos
+      secret: ${JWT_SECRET:f3a1c2d4e5b6a7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2} # Chave secreta para assinar o token
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
