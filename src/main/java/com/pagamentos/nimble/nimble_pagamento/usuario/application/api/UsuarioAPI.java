@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pagamentos.nimble.nimble_pagamento.docs.swagger.UsuarioAPIDocs;
 import com.pagamentos.nimble.nimble_pagamento.usuario.application.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/usuario")
 @RequiredArgsConstructor
 @Log4j2
+@Tag(name = "UsuarioAPI", description = "Operações relacionadas ao usuário.")
 public class UsuarioAPI {
         private final UsuarioService usuarioService;
 
