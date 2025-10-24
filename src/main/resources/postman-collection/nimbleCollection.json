@@ -1,0 +1,452 @@
+{
+  "info": {
+    "name": "Nimble Pagamento API",
+    "description": "API Gateway de Pagamentos - Collection para testes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/nimble-pagamento/api"
+    },
+    {
+      "key": "token",
+      "value": "your-jwt-token-here"
+    },
+    {
+      "key": "userId",
+      "value": "your-user-uuid-here"
+    },
+    {
+      "key": "cobrancaId",
+      "value": "your-cobranca-uuid-here"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔐 Autenticação",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpfOuEmail\": \"12345678909\",\n  \"senha\": \"senhaSegura\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuario/autenticacao/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario",
+                "autenticacao",
+                "login"
+              ]
+            },
+            "description": "Autenticação de usuário via CPF ou email + senha"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de autenticação"
+    },
+    {
+      "name": "👤 Usuário",
+      "item": [
+        {
+          "name": "Cadastrar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"cpf\": \"12345678909\",\n  \"email\": \"joao@email.com\",\n  \"senha\": \"senhaSegura\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuario",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario"
+              ]
+            },
+            "description": "Cadastro de novo usuário no sistema"
+          },
+          "response": []
+        },
+        {
+          "name": "Consultar Usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario",
+                "{{userId}}"
+              ]
+            },
+            "description": "Consulta os detalhes do usuário pelo ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Alterar Usuário",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@email.com\",\n  \"senha\": \"novaSenha123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuario/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario",
+                "{{userId}}"
+              ]
+            },
+            "description": "Altera dados do usuário pelo ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/usuario/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuario",
+                "{{userId}}"
+              ]
+            },
+            "description": "Remove o usuário pelo ID"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de gerenciamento completo de usuário"
+    },
+    {
+      "name": "💰 Cobrança",
+      "item": [
+        {
+          "name": "Criar Cobrança",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cpfDestinatario\": \"11144477735\",\n  \"valorCobranca\": 150.00,\n  \"descricao\": \"Serviço de consultoria\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas"
+              ]
+            },
+            "description": "Cria uma nova cobrança para um destinatário"
+          },
+          "response": []
+        },
+        {
+          "name": "Consultar Cobrança por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas/consulta?idCobranca={{cobrancaId}}&idUsuarioSolicitante={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas",
+                "consulta"
+              ],
+              "query": [
+                {
+                  "key": "idCobranca",
+                  "value": "{{cobrancaId}}"
+                },
+                {
+                  "key": "idUsuarioSolicitante",
+                  "value": "{{userId}}"
+                }
+              ]
+            },
+            "description": "Consulta os detalhes de uma cobrança específica (apenas originador ou destinatário)"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Cobranças Criadas (Originador)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas/originador?IdusuarioOriginador={{userId}}&status=PENDENTE",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas",
+                "originador"
+              ],
+              "query": [
+                {
+                  "key": "IdusuarioOriginador",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "status",
+                  "value": "PENDENTE"
+                }
+              ]
+            },
+            "description": "Lista todas as cobranças criadas pelo usuário originador"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar Cobranças Recebidas (Destinatário)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas/destinatario?idUsuarioSolicitante={{userId}}&status=PAGA",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas",
+                "destinatario"
+              ],
+              "query": [
+                {
+                  "key": "idUsuarioSolicitante",
+                  "value": "{{userId}}"
+                },
+                {
+                  "key": "status",
+                  "value": "PAGA"
+                }
+              ]
+            },
+            "description": "Lista todas as cobranças recebidas pelo usuário destinatário"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de gerenciamento de cobranças"
+    },
+    {
+      "name": "💳 Pagamento",
+      "item": [
+        {
+          "name": "Pagar com Saldo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas/pagamento/{{cobrancaId}}?idUsuarioPagador={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas",
+                "pagamento",
+                "{{cobrancaId}}"
+              ],
+              "query": [
+                {
+                  "key": "idUsuarioPagador",
+                  "value": "{{userId}}"
+                }
+              ]
+            },
+            "description": "Efetua pagamento de uma cobrança usando o saldo da conta"
+          },
+          "response": []
+        },
+        {
+          "name": "Pagar com Cartão",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCartao\": \"4111111111111111\",\n  \"validade\": \"12/28\",\n  \"cvv\": \"123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas/pagamento-cartao/{{cobrancaId}}?idUsuarioPagador={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas",
+                "pagamento-cartao",
+                "{{cobrancaId}}"
+              ],
+              "query": [
+                {
+                  "key": "idUsuarioPagador",
+                  "value": "{{userId}}"
+                }
+              ]
+            },
+            "description": "Efetua pagamento de uma cobrança usando cartão de crédito"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de processamento de pagamentos"
+    },
+    {
+      "name": "🔄 Cancelamento",
+      "item": [
+        {
+          "name": "Cancelar Cobrança",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/cobrancas/{{cobrancaId}}/cancelamento?idUsuarioSolicitante={{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cobrancas",
+                "{{cobrancaId}}",
+                "cancelamento"
+              ],
+              "query": [
+                {
+                  "key": "idUsuarioSolicitante",
+                  "value": "{{userId}}"
+                }
+              ]
+            },
+            "description": "Cancela uma cobrança pendente (apenas originador)"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de cancelamento de cobranças"
+    },
+    {
+      "name": "🏥 Monitoramento",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/actuator/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "actuator",
+                "health"
+              ]
+            },
+            "description": "Verifica o status de saúde da aplicação"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de monitoramento e health checks"
+    }
+  ]
+}
