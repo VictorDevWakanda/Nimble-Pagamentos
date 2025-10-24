@@ -27,8 +27,14 @@ public class RateLimitingFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+            HttpServletResponse response,
+            FilterChain filterChain) throws ServletException, IOException {
+
+        String path = request.getRequestURI();
+        if (path.contains("/swagger-ui") || path.contains("/v3/api-docs")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String clientIP = getClienteIP(request);
         RequestBucket bucket = buckets.computeIfAbsent(clientIP, k -> new RequestBucket());
