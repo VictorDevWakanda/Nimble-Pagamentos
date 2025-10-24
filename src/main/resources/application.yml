@@ -3,8 +3,12 @@ server:
     context-path: /nimble-pagamento/api
 
 springdoc:
+  api-docs:
+    path: /v3/api-docs
   swagger-ui:
-    path: /swagger-ui
+    path: /swagger-ui.html
+    operationsSorter: alpha
+    tagsSorter: alpha
 
 management:
   endpoints:
@@ -15,11 +19,12 @@ management:
     health:
       show-details: always
 
-logging:
-  level:
-    nimble-pagamento: DEBUG
-
+# Configuração para validações
 spring:
+  jpa:
+    properties:
+      hibernate.validator.apply_to_ddl: false
+      jakarta.persistence.validation.mode: AUTO
   profiles:
     active: ${APP_PROFILE:local}
   datasource:
@@ -41,10 +46,14 @@ security:
       expiration: ${JWT_EXPIRATION:7200} # Expiração do token em segundos
       secret: ${JWT_SECRET:f3a1c2d4e5b6a7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2} # Chave secreta para assinar o token
 
-  jpa:
+autorizador:
+  pagamento.path: ${AUTORIZADOR_PAGAMENTO_PATH:https://zsy6tx7aql.execute-api.sa-east-1.amazonaws.com/authorizer}
+  cancelamento.path: ${AUTORIZADOR_CANCELAMENTO_PATH:https://zsy6tx7aql.execute-api.sa-east-1.amazonaws.com/authorizer}
+
+jpa:
+  hibernate:
+    ddl-auto: validate
+  show-sql: true
+  properties:
     hibernate:
-      ddl-auto: validate
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+      dialect: org.hibernate.dialect.PostgreSQLDialect
