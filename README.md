@@ -4,7 +4,6 @@ Este projeto é uma API REST desenvolvida para simular um gateway de pagamentos 
 
 ## Sumário
 
-- [Sobre o Projeto](#sobre-o-projeto)
 - [Requisitos](#requisitos)
 - [Instalação](#instalação)
 - [Execução](#execução)
@@ -17,9 +16,6 @@ Este projeto é uma API REST desenvolvida para simular um gateway de pagamentos 
 - [Observações](#observações)
 - [Autor](#autor)
 
-## Sobre o Projeto
-
-O Nimble Pagamento foi desenvolvido como parte de um desafio técnico para a empresa Nimble. O objetivo é demonstrar habilidades em design de software, segurança, integração com serviços externos, boas práticas de programação e testes automatizados.
 
 ### Funcionalidades Principais
 
