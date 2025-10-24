@@ -364,7 +364,7 @@ O plugin JaCoCo está configurado no `pom.xml` com:
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 **João Victor Mota**
 
