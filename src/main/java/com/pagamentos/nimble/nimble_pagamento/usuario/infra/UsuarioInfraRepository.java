@@ -50,4 +50,14 @@ public class UsuarioInfraRepository implements UsuarioRepository {
         log.info("[Finaliza] UsuarioInfraRepository - deletaUsuario");
     }
 
+    @Override
+    public Usuario buscaUsuarioPorCpf(String cpfUsuario) {
+       log.info("[Inicia] UsuarioInfraRepository - buscaUsuarioPorCpf");
+        Usuario usuario = usuarioSpringDataJPARepository
+                .findByCpf(cpfUsuario)
+                .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Usuario não encontrado"));
+        log.info("[Finaliza] UsuarioInfraRepository - buscaUsuarioPorCpf");
+        return usuario;
+    }
+
 }

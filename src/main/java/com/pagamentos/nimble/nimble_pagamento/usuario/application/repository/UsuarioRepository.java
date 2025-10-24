@@ -10,4 +10,6 @@ public interface UsuarioRepository {
     Usuario buscaUsuarioAtravesId(UUID idUsuario);
 
     void deletaUsuario(Usuario usuario);
+
+    Usuario buscaUsuarioPorCpf(String cpfUsuario);
 }
