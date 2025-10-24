@@ -323,6 +323,7 @@ Content-Type: application/json
 - ✅ **Clean Code:** SOLID, DDD e boas práticas
 - ✅ **Documentação:** Swagger UI atualizada
 - ✅ **Testes:** Testes unitários e de integração com cobertura JaCoCo
+- ❌ **OBS:** Os testes não puderam ser concluidos pois faltou tempo para a conclusão!
 
 ## 📊 Testes e Cobertura de Código
 
@@ -360,15 +361,6 @@ O plugin JaCoCo está configurado no `pom.xml` com:
 - **Relatório:** Gerado automaticamente na fase `test`
 - **Formato:** HTML (acessível via navegador)
 - **Integração:** Maven (executado com `mvn test`)
-
-### 📋 Estrutura de Testes
-
-O projeto está estruturado para suportar:
-
-- ✅ **Testes Unitários** - Domain Services e regras de negócio
-- ✅ **Testes de Integração** - Controllers, repositories e fluxos completos
-- ✅ **Testes de API** - Endpoints REST
-- ✅ **Cobertura de Código** - Análise automática com JaCoCo
 
 ---
 
