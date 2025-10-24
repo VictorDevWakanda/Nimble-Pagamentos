@@ -47,10 +47,16 @@ cd nimble-pagamento
 ### 2. Inicie os containers Docker:
 
 ```bash
-docker compose up -d
+docker compose up --build -d
 ```
 
-### 3. Execute a aplicação:
+### 3. Compile:
+
+```bash
+mvn clean install
+```
+
+### 4. Execute a aplicação:
 
 ```bash
 ./mvnw spring-boot:run
