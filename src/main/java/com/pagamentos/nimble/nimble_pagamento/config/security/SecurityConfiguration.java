@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/usuario").permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers("/usuario/**").authenticated()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cobrancas/**").authenticated()
                         .requestMatchers(HttpMethod.GET, "/cobrancas/**").authenticated()
                         .anyRequest().authenticated())
