@@ -1,4 +1,4 @@
-# 💳 Nimble Pagamento – API Gateway de Pagamentos
+# 💳 Nimble Pagamento – API de Pagamentos
 
 Este projeto é uma API REST desenvolvida para simular uma API de pagamentos simplificado, permitindo que usuários realizem operações como cadastro, autenticação, criação e gestão de cobranças, pagamentos entre contas, depósitos e cancelamentos.
 
